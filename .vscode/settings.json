@@ -1,0 +1,16 @@
+{
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll": "explicit",
+		"source.organizeImports": "explicit",
+		"source.sortMembers": "always"
+	},
+	"files.exclude": {
+		"node_modules/": true,
+		".gitignore": true,
+		".expo": true,
+		".prettierrc": true,
+		"babel.config.js": true,
+		"package-lock.json": true
+	}
+}
