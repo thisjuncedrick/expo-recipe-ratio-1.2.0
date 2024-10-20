@@ -5,11 +5,13 @@
 		"source.organizeImports": "explicit",
 		"source.sortMembers": "always"
 	},
+	"editor.trimAutoWhitespace": false,
+
 	"files.exclude": {
 		"node_modules/": true,
 		".gitignore": true,
 		".expo": true,
-		".prettierrc": true,
+		".prettierrc": false,
 		"babel.config.js": true,
 		"package-lock.json": true
 	}
