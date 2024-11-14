@@ -37,7 +37,7 @@ export const DBSaveButton = () => {
 		});
 	};
 
-	return <Appbar.Action icon='database-export' onPress={copyDatabaseToDownloads} />;
+	return <Appbar.Action icon='share' onPress={copyDatabaseToDownloads} />;
 };
 
 export const DBDeleteButton = () => {

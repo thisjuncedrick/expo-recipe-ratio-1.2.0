@@ -32,37 +32,43 @@ const Index = (): JSX.Element => {
 	};
 
 	return (
-		<Container>
-			{/* Display a background image with a gradient overlay */}
-			<View style={Styles.flex_1}>
-				<ImageBackground style={Styles.h_full} source={{ uri: APP_BANNER }}>
-					<LinearGradient colors={['transparent', colors.background]} locations={[0.5, 1]} style={Styles.h_full} />
-				</ImageBackground>
-			</View>
+		<>
+			<Container>
+				{/* Display a background image with a gradient overlay */}
+				<View style={Styles.flex_1}>
+					<ImageBackground style={Styles.h_full} source={{ uri: APP_BANNER }}>
+						<LinearGradient
+							colors={['transparent', colors.background]}
+							locations={[0.5, 1]}
+							style={Styles.h_full}
+						/>
+					</ImageBackground>
+				</View>
 
-			<View style={Styles.p_md}>
-				{/* App header text */}
-				<Text variant='headlineSmall' style={[Styles.textBold, { color: colors.primary }]}>
-					{Strings.header}
-				</Text>
+				<View style={Styles.p_md}>
+					{/* App header text */}
+					<Text variant='headlineSmall' style={[Styles.textBold, { color: colors.primary }]}>
+						{Strings.header}
+					</Text>
 
-				{/* Subheader text */}
-				<Text variant='bodyLarge' style={Styles.mb_md}>
-					{Strings.subheader}
-				</Text>
+					{/* Subheader text */}
+					<Text variant='bodyLarge' style={Styles.mb_md}>
+						{Strings.subheader}
+					</Text>
 
-				{/* CTA Button */}
-				<Button
-					mode='contained'
-					onPress={handleHomeScreen}
-					icon='chevron-right'
-					contentStyle={{ flexDirection: 'row-reverse' }}
-					uppercase={true}
-				>
-					{Strings.get_started}
-				</Button>
-			</View>
-		</Container>
+					{/* CTA Button */}
+					<Button
+						mode='contained'
+						onPress={handleHomeScreen}
+						icon='chevron-right'
+						contentStyle={{ flexDirection: 'row-reverse' }}
+						uppercase={true}
+					>
+						{Strings.get_started}
+					</Button>
+				</View>
+			</Container>
+		</>
 	);
 };
 

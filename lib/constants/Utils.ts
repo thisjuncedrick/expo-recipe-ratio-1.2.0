@@ -70,7 +70,12 @@ export const formatTime = (totalSeconds: number): string => {
 	const minutes = Math.floor((totalSeconds % 3600) / 60);
 	const seconds = totalSeconds % 60;
 
-	return [days.toString().padStart(2, '0'), hours.toString().padStart(2, '0'), minutes.toString().padStart(2, '0'), seconds.toString().padStart(2, '0')].join(':');
+	return [
+		days.toString().padStart(2, '0'),
+		hours.toString().padStart(2, '0'),
+		minutes.toString().padStart(2, '0'),
+		seconds.toString().padStart(2, '0'),
+	].join(':');
 };
 export function validateIntegerInput(input: string): number | null {
 	// Regular expression to match only positive integers
@@ -96,3 +101,10 @@ export function validateIntegerInput(input: string): number | null {
 
 	return intValue; // Valid positive integer within the range
 }
+
+export const extractYouTubeId = (url: string): string | null => {
+	const regex =
+		/(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:youtube\.com\/(?:watch\?(?:.*&)?v=|v\/|embed\/|oembed\?url=http.*v%3D)|youtu\.be\/)([\w-]{11})(?:&|\?|$)/;
+	const match = url.match(regex);
+	return match ? match[1] : null;
+};

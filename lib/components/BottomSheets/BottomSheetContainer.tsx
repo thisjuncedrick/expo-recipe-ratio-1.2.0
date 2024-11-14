@@ -33,6 +33,7 @@ interface BottomSheetContainer extends SheetContainerProps {
 	panDownToClose?: boolean;
 	showIndicator?: boolean;
 	snapToIndex?: 0 | 1 | 2;
+	flex?: number;
 }
 
 /**
@@ -57,10 +58,11 @@ export const BottomSheetContainer = ({
 	panDownToClose = false,
 	backdropPress = 'none',
 	snapToIndex = 0,
+	flex = 0,
 }: BottomSheetContainer) => {
 	const { colors } = useTheme();
 	const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-	const snapPoints = useMemo(() => ['35%', '50%', '65%'], []);
+	const snapPoints = useMemo(() => ['35%', '50%', '70%'], []);
 
 	/**
 	 * Renders the backdrop component for the bottom sheet.
@@ -143,8 +145,9 @@ export const BottomSheetContainer = ({
 					duration: 250,
 					easing: Easing.linear,
 				})}
+				keyboardBlurBehavior='restore'
 			>
-				<BottomSheetScrollView contentContainerStyle={{ flex: 1 }}>{children}</BottomSheetScrollView>
+				<BottomSheetScrollView contentContainerStyle={{ flex: flex }}>{children}</BottomSheetScrollView>
 			</BottomSheetModal>
 		</BottomSheetModalProvider>
 	);

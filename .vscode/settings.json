@@ -11,7 +11,7 @@
 		"node_modules/": true,
 		".gitignore": true,
 		".expo": true,
-		".prettierrc": false,
+		".prettierrc": true,
 		"babel.config.js": true,
 		"package-lock.json": true
 	}

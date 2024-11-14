@@ -19,6 +19,7 @@ type BaseRecipe = {
 	description: string;
 	cover_image: string;
 	date_created: Date;
+	video_tutorial: string;
 };
 
 type IngredientsPreview = {
@@ -50,4 +51,14 @@ type FavoriteRecipe = Omit<BaseRecipe, 'id' | 'date_created'> & {
 	date_favorited: string;
 };
 
-export { BaseRecipe, CustomIngredient, Direction, FavoriteRecipe, Ingredient, IngredientsPreview, RecipeDirections, RecipeIngredients, RecipePreview };
+export {
+	BaseRecipe,
+	CustomIngredient,
+	Direction,
+	FavoriteRecipe,
+	Ingredient,
+	IngredientsPreview,
+	RecipeDirections,
+	RecipeIngredients,
+	RecipePreview,
+};

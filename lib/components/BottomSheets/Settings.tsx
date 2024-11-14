@@ -1,6 +1,6 @@
 // Settings.tsx
 
-import { BottomSheetContainer, SheetContainerProps } from '@/lib/components/BottomSheets/';
+import { BottomSheetContainer, SheetContainerProps } from '@/lib/components/BottomSheets/BottomSheetContainer';
 import { SETTINGS_KEY, Strings } from '@/lib/constants';
 import { Setting } from '@/lib/types';
 import { Styles } from '@/lib/ui';
@@ -239,6 +239,8 @@ export const Settings = ({ isVisible, onClose }: SheetContainerProps): JSX.Eleme
 					</View>
 					<Switch value={settings.checkList} onValueChange={handleIngredientsChecking} />
 				</View>
+
+				<Divider style={Styles.mv_sm} />
 
 				<View style={[Styles.ph_md]}>
 					{/* Save button */}

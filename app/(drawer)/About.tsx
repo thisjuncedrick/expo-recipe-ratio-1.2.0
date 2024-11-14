@@ -27,12 +27,12 @@ const TEAM: Credits[] = [
 		contribution: 'Researcher',
 	},
 	{
-		name: 'NAME 1',
+		name: 'Jholan G. Maglaqui',
 		social: 'https://facebook.com/',
 		contribution: 'Researcher',
 	},
 	{
-		name: 'NAME 1',
+		name: 'Mharon S. Mariano',
 		social: 'https://facebook.com/',
 		contribution: 'Researcher',
 	},

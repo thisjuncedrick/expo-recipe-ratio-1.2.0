@@ -18,14 +18,21 @@ export const useFavorites = (record: RecipeIngredients | null | undefined, db: S
 		error: undefined,
 	});
 
-	const { id: recipeId, name: recipeName, cover_image, description } = record || { id: 0, name: null, cover_image: null, description: null };
+	const {
+		id: recipeId,
+		name: recipeName,
+		cover_image,
+		description,
+	} = record || { id: 0, name: null, cover_image: null, description: null };
 
 	const checkIfFavorited = useCallback(async (id: number) => {
 		if (!id) return false;
 		setState((prev) => ({ ...prev, isLoading: true })); // Set loading to true at the beginning
 
 		try {
-			const result: FavoriteRecipe | null = await db.getFirstAsync('SELECT * FROM Favorites WHERE recipe_id = ?', [id]);
+			const result: FavoriteRecipe | null = await db.getFirstAsync('SELECT * FROM Favorites WHERE recipe_id = ?', [
+				id,
+			]);
 			setState((prev) => ({ ...prev, isFavorite: result != null, dateFavorited: result?.date_favorited }));
 		} catch (err) {
 			ToastAndroid.show('Error checking favorite status', ToastAndroid.LONG);
@@ -46,7 +53,10 @@ export const useFavorites = (record: RecipeIngredients | null | undefined, db: S
 				const { id, name, description, cover_image } = recipeDetails;
 				const now = new Date().toJSON();
 
-				db.runAsync('INSERT INTO Favorites (recipe_id, name, description, cover_image, date_favorited) VALUES (?, ?, ?, ?, ?)', [id, name, description, cover_image, now]);
+				db.runAsync(
+					'INSERT INTO Favorites (recipe_id, name, description, cover_image, date_favorited) VALUES (?, ?, ?, ?, ?)',
+					[id, name, description, cover_image, now],
+				);
 			}
 
 			ToastAndroid.show(`Added '${recipeName}' to Favorites`, ToastAndroid.SHORT);
@@ -67,9 +77,8 @@ export const useFavorites = (record: RecipeIngredients | null | undefined, db: S
 			if (record && record.ingredients) {
 				const { id } = record;
 				db.runAsync('DELETE FROM Favorites WHERE recipe_id = ?', [id]);
+				ToastAndroid.show(`Removed '${recipeName}' from Favorites`, ToastAndroid.SHORT);
 			}
-
-			ToastAndroid.show(`Removed '${recipeName}' from Favorites`, ToastAndroid.SHORT);
 
 			setState((prev) => ({ ...prev, isFavorite: false }));
 		} catch (err) {

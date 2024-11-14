@@ -6,7 +6,8 @@ export const Strings = {
 	loading_message: 'Your data is currently being processed. Please wait.',
 
 	error_title: 'Request failed',
-	error_message: 'There was a problem accessing the data you requested. Please contact our support team for assistance.',
+	error_message:
+		'There was a problem accessing the data you requested. Please contact our support team for assistance.',
 
 	header: 'Ready to Spice Things Up?',
 	subheader: 'Find fresh recipes to surprise your taste buds.',
@@ -16,8 +17,12 @@ export const Strings = {
 	favorites_label: 'Favorites',
 	settings_label: 'Settings',
 	about_label: 'About',
+	video_tutorial_label: 'Video Tutorial',
 
 	pick_meat: 'choose your meat type',
+
+	text_guide_btn: 'Text Guide',
+	video_guide_btn: 'Video Guide',
 
 	servings: 'Serving Size',
 	ingredients: 'Ingredients',
@@ -73,7 +78,8 @@ export const Strings = {
 	unchecked: 'Disabled',
 
 	reset_data: 'Reset Data',
-	reset_data_warning: 'Deleting the database will remove all records, including favorite items, custom ingredients. Proceed with extreme caution.',
+	reset_data_warning:
+		'Deleting the database will remove all records, including favorite items, custom ingredients. Proceed with extreme caution.',
 	reset_type_text: 'To confirm, type RECIPE RATIO in the box below',
 
 	save_settings: 'Save Settings',

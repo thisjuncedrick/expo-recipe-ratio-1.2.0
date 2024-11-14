@@ -13,38 +13,39 @@ export const useFetchFavoritesList = (db: SQLiteDatabase) => {
 	const [error, setError] = useState<Error | null>(null);
 	const [hasMore, setHasMore] = useState(true);
 
-	const fetchFavorites = useCallback(
-		async (reset = false) => {
-			if (reset) {
-				setIsLoading(true);
-				setOffset(0);
+	const fetchFavorites = async (reset = false) => {
+		if (reset) {
+			setIsLoading(true);
+			setOffset(0);
+			setRecipes([]); // Reset recipes on new fetch
+		} else {
+			setIsFetchingNextPage(true);
+		}
+		setIsError(false);
+		setError(null);
+
+		try {
+			const newOffset = reset ? 0 : offset;
+			const result = await db.getAllAsync<FavoriteRecipe>(
+				'SELECT * FROM Favorites ORDER BY date_favorited DESC LIMIT ? OFFSET ?',
+				[BATCH_SIZE, newOffset],
+			);
+
+			if (result && result.length > 0) {
+				setRecipes((prevRecipes) => (reset ? result : [...prevRecipes, ...result]));
+				setOffset((prevOffset) => prevOffset + result.length);
+				setHasMore(result.length === BATCH_SIZE);
 			} else {
-				setIsFetchingNextPage(true);
+				setHasMore(false);
 			}
-			setIsError(false);
-			setError(null);
-
-			try {
-				const newOffset = reset ? 0 : offset;
-				const result = await db.getAllAsync<FavoriteRecipe>('SELECT * FROM Favorites ORDER BY date_favorited DESC LIMIT ? OFFSET ?', [BATCH_SIZE, newOffset]);
-
-				if (result && result.length > 0) {
-					setRecipes((prevRecipes) => (reset ? result : [...prevRecipes, ...result]));
-					setOffset((prevOffset) => prevOffset + result.length);
-					setHasMore(result.length === BATCH_SIZE);
-				} else {
-					setHasMore(false);
-				}
-			} catch (err) {
-				setIsError(true);
-				setError(err instanceof Error ? err : new Error('An unknown error occurred'));
-			} finally {
-				setIsLoading(false);
-				setIsFetchingNextPage(false);
-			}
-		},
-		[db, offset],
-	);
+		} catch (err) {
+			setIsError(true);
+			setError(err instanceof Error ? err : new Error('An unknown error occurred'));
+		} finally {
+			setIsLoading(false);
+			setIsFetchingNextPage(false);
+		}
+	};
 
 	const loadMoreData = useCallback(() => {
 		if (!isLoading && !isFetchingNextPage && hasMore) {

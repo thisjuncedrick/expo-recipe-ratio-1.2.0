@@ -122,7 +122,7 @@ const Home = (): JSX.Element => {
 
 					<FlatList
 						data={MEAT_TYPES}
-						keyExtractor={(item, index) => index.toString()}
+						keyExtractor={(_, index) => index.toString()}
 						renderItem={({ item, index }) => (
 							<RenderMeatFrame item={item} index={index} totalItems={MEAT_TYPES.length} />
 						)}

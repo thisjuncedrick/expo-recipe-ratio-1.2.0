@@ -5,6 +5,8 @@ import { useTimerContext } from '@/lib/components/Directions/TimerContext';
 import { formatTime } from '@/lib/constants';
 import { Styles } from '@/lib/ui';
 import { RouteProp, useFocusEffect, useRoute } from '@react-navigation/native';
+import { Asset } from 'expo-asset';
+import { Audio } from 'expo-av';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ToastAndroid, Vibration, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
@@ -33,8 +35,26 @@ export const Timer = (): JSX.Element => {
 	const [timeLeft, setTimeLeft] = useState(route.params.totalSeconds);
 	const [initialTime, setInitialTime] = useState(route.params.totalSeconds);
 
+	const [sound, setSound] = useState<Audio.Sound | null>(null);
+
 	// Timer context provides information on whether the timer is running and a setter to change that state.
 	const { isRunning, setIsRunning } = useTimerContext();
+
+	/**
+	 * Load audio file for alarm
+	 */
+	useEffect(() => {
+		const loadSound = async () => {
+			const alarmSound = Asset.fromModule(require('@/assets/audio/bedside-clock-alarm-95792.mp3')).uri;
+			const { sound } = await Audio.Sound.createAsync({ uri: alarmSound });
+			setSound(sound);
+		};
+		loadSound();
+
+		return () => {
+			if (sound) sound.unloadAsync(); // Unload sound when component unmounts
+		};
+	}, []);
 
 	/**
 	 * Focus effect that runs when the Timer screen comes into focus.
@@ -47,7 +67,8 @@ export const Timer = (): JSX.Element => {
 			setInitialTime(newTotalSeconds);
 			setIsRunning(false); // Ensure the timer is not running when screen gains focus.
 			Vibration.cancel(); // Stop any ongoing vibration.
-		}, [route.params.totalSeconds]),
+			if (sound) sound.stopAsync(); // Stop sound when refocusing
+		}, [route.params.totalSeconds, sound]),
 	);
 
 	/**
@@ -65,6 +86,10 @@ export const Timer = (): JSX.Element => {
 			setIsRunning(false);
 			Vibration.vibrate([1000, 1500, 1000, 1500], true);
 			ToastAndroid.show('TIME IS UP', ToastAndroid.LONG);
+			if (sound) {
+				sound.setIsLoopingAsync(true); // Loop the alarm sound
+				sound.playAsync();
+			}
 		}
 
 		return () => clearInterval(intervalId);
@@ -76,6 +101,7 @@ export const Timer = (): JSX.Element => {
 	 */
 	const handleStartStop = () => {
 		setIsRunning(!isRunning);
+		if (!isRunning && sound) sound.stopAsync(); // Stop sound when stopping the timer
 	};
 
 	/**
@@ -85,6 +111,7 @@ export const Timer = (): JSX.Element => {
 		Vibration.cancel();
 		setIsRunning(false);
 		setTimeLeft(initialTime);
+		if (sound) sound.stopAsync(); // Stop sound on reset
 	};
 
 	return (

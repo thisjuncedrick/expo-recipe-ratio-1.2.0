@@ -36,6 +36,7 @@ export const Timer = ({ isVisible, onClose, totalSeconds }: TimerSheetProps): JS
 			onClose={handleBottomSheetClose}
 			showIndicator={false}
 			snapToIndex={2}
+			flex={1}
 		>
 			<TimerContext.Provider value={{ isRunning, setIsRunning }}>
 				<View style={[Styles.flex_1, { width: '100%' }]}>

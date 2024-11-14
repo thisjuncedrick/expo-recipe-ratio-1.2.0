@@ -1,3 +1,4 @@
+import { Strings } from '@/lib/constants';
 import { Styles } from '@/lib/ui';
 import { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -37,6 +38,7 @@ const StackLayout = () => {
 					initialRouteName='Recipes'
 				>
 					<Stack.Screen name='Recipes' />
+					<Stack.Screen name='Video' options={{ title: Strings.video_tutorial_label }} />
 					<Stack.Screen name='Ingredients' options={{ headerTransparent: true, title: ' ' }} />
 					<Stack.Screen name='Directions' />
 				</Stack>

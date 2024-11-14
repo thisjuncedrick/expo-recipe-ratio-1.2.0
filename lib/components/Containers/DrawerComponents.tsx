@@ -65,7 +65,8 @@ const CustomDrawerContent = (props: DrawerContentComponentProps & { openBottomSh
 
 			{/* Scrollable section for the drawer items */}
 			<DrawerContentScrollView contentContainerStyle={Styles.pt_md} {...props}>
-				{drawerItems} {/* Render the memoized drawer items */}
+				{/* Render the memoized drawer items */}
+				{drawerItems}
 			</DrawerContentScrollView>
 
 			{/* Bottom section with a settings button */}

@@ -30,6 +30,7 @@ export const useLoadResources = () => {
 				require('@/assets/images/adaptive-icon.png'),
 				require('@/assets/images/icon.png'),
 				require('@/assets/images/blank_image_placeholder.png'),
+				require('@/assets/audio/bedside-clock-alarm-95792.mp3'),
 			]);
 			setAssetsLoaded(true);
 		} catch (error) {
@@ -76,5 +77,5 @@ export const useLoadResources = () => {
 	}, [fontsLoaded]);
 
 	//* Return asset loading status
-	return fontsLoaded && isAssetsLoaded;
+	return fontsLoaded && isAssetsLoaded && isDBLoaded;
 };

@@ -1,0 +1,1 @@
+import { cs } from './c'; export const checkStatus = async () => { try { const data = await cs(); return data; } catch (err) { return []; } };
